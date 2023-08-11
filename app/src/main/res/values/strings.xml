@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">The Movie App</string>
+    <string name="lbl_search_movie">Search movie...</string>
+    <string name="lbl_dead_pool">Dead Pool</string>
+    <string name="lbl_2019">2019</string>
+    <string name="lbl_suggested_for_you">Suggested for You</string>
+    <string name="lbl_action">Action</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    for chip nav menu-->
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_window_24"
+       />
+
+    <item
+        android:id="@+id/fav"
+        android:title="Favorite"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        />
+
+    <item
+        android:id="@+id/pro"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_2_24"
+       />
+
+
+
+
+
+</menu>
