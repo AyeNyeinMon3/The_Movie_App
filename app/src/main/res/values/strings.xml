@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">The Movie App</string>
     <string name="lbl_search_movie">Search movie...</string>
-    <string name="lbl_dead_pool">Dead Pool</string>
+    <string name="lbl_dead_pool">Deadpool</string>
     <string name="lbl_2019">2019</string>
     <string name="lbl_suggested_for_you">Suggested for You</string>
     <string name="lbl_action">Action</string>
+    <string name="lbl_watch_trailer">Watch Trailer</string>
+    <string name="lbl_home">Home</string>
+    <string name="lbl_favorite">Favorite</string>
+    <string name="lbl_profile">Profile</string>
+    <string name="lbl_story_line">Story Line</string>
+    <string name="overview">Wade Wilson (Ryan Reynolds) is a former Special Forces operative who now works as a mercenary. His world comes crashing down when evil scientist Ajax (Ed Skrein) tortures, disfigures and transforms him into Deadpool. The rogue experiment leaves Deadpool with accelerated healing powers and a twisted sense of humor. With help from mutant allies Colossus and Negasonic Teenage Warhead (Brianna Hildebrand), Deadpool uses his new skills to hunt down the man who nearly destroyed his life.</string>
+    <string name="lbl_cast">Cast</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

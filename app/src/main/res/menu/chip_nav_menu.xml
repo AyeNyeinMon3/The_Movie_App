@@ -4,21 +4,31 @@
 <!--    for chip nav menu-->
 
     <item
-        android:id="@+id/homeFragment"
-        android:title="Home"
+        android:id="@+id/home"
+        android:title="@string/lbl_home"
         android:icon="@drawable/ic_baseline_window_24"
+        app:cnb_backgroundColor = "@color/color_primary"
+        app:cnb_iconColor = "@color/white"
+        app:cnb_textColor = "@color/white"
+
        />
 
     <item
-        android:id="@+id/fav"
-        android:title="Favorite"
+        android:id="@+id/favorite"
+        android:title="@string/lbl_favorite"
         android:icon="@drawable/ic_baseline_favorite_24"
+        app:cnb_backgroundColor = "@color/color_primary"
+        app:cnb_iconColor = "@color/white"
+        app:cnb_textColor = "@color/white"
         />
 
     <item
-        android:id="@+id/pro"
-        android:title="Profile"
+        android:id="@+id/profile"
+        android:title="@string/lbl_profile"
         android:icon="@drawable/ic_baseline_person_2_24"
+        app:cnb_backgroundColor = "@color/color_primary"
+        app:cnb_iconColor = "@color/white"
+        app:cnb_textColor = "@color/white"
        />
 
 

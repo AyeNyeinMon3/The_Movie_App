@@ -7,7 +7,7 @@
     app:cardBackgroundColor="@color/color_dark"
     app:strokeColor="@color/color_dark"
     app:strokeWidth="1dp"
-    android:layout_marginTop="16dp">
+    android:layout_marginBottom="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,20 +22,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dead_pool_poster" />
+        tools:srcCompat="@drawable/dead_pool_poster" />
 
-    <TextView
-        android:id="@+id/tv_movieName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/lbl_dead_pool"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_open"
-        app:layout_constraintStart_toEndOf="@+id/iv_poster"
-        app:layout_constraintTop_toTopOf="@+id/iv_poster" />
+        <TextView
+            android:id="@+id/tv_movieName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/lbl_dead_pool"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_open"
+            app:layout_constraintStart_toEndOf="@+id/iv_poster"
+            app:layout_constraintTop_toTopOf="@+id/iv_poster" />
 
     <TextView
         android:id="@+id/tv_releaseYear"
@@ -58,15 +58,15 @@
         app:layout_constraintStart_toEndOf="@+id/tv_movieName"
         app:layout_constraintTop_toTopOf="@+id/tv_releaseYear" />
 
-    <TextView
-        android:id="@+id/tv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text=")"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_releaseYear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_releaseYear" />
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text=")"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_releaseYear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_releaseYear" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -76,8 +76,8 @@
         android:layout_marginTop="8dp"
         android:numStars="5"
         android:rating="5"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
+        android:scaleX="1.3"
+        android:scaleY="1.3"
         android:transformPivotX="0dp"
         android:transformPivotY="0dp"
         android:isIndicator="true"
@@ -85,13 +85,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_movieName" />
 
         <TextView
-            android:id="@+id/tv_genre"
+            android:id="@+id/tv_voteAverage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Action, Drama"
-            android:textColor="@color/secondary_textColor"
+            android:text="6.7"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/ratingBar"
