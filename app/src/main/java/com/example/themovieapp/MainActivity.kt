@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
 
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+
 
         binding.chipNavBar.setItemSelected(R.id.chip_navBar,true)
 
@@ -31,15 +34,15 @@ class MainActivity : AppCompatActivity() {
         binding.chipNavBar.setOnItemSelectedListener {
             when(it) {
                 R.id.home -> {
-                    switchFragment(HomeFragment())
+                    navController.navigate(R.id.homeFragment)
                 }
 
                 R.id.favorite -> {
-                    switchFragment(FavoriteFragment())
+                    navController.navigate(R.id.favoriteFragment)
                 }
 
                 R.id.profile -> {
-                    switchFragment(ProfileFragment())
+                    navController.navigate(R.id.profileFragment)
                 }
             }
         }
@@ -49,11 +52,11 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun switchFragment(fragment:Fragment){
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.nav_host_fragment, fragment)
-            .commit()
-
-    }
+//    private fun switchFragment(fragment:Fragment){
+//        supportFragmentManager.beginTransaction()
+//            .addToBackStack(null)
+//            .replace(R.id.nav_host_fragment, fragment)
+//            .commit()
+//
+//    }
 }

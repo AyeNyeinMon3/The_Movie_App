@@ -12,11 +12,14 @@ import com.example.themovieapp.utils.API_GENRE_LIST
 import com.example.themovieapp.utils.API_GET_NOW_PLAYING
 import com.example.themovieapp.utils.API_MOVIES_BY_GENRE_ID
 import com.example.themovieapp.utils.API_MOVIE_DETAILS
+import com.example.themovieapp.utils.API_SEARCH_MOVIE
 import com.example.themovieapp.utils.API_VIDEOS
 import com.example.themovieapp.utils.MOVIE_API_KEY
 import com.example.themovieapp.utils.PARAM_API_KEY
 import com.example.themovieapp.utils.PARAM_GENRE_ID
 import com.example.themovieapp.utils.PARAM_PAGE
+import com.example.themovieapp.utils.PARAM_QUERY
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,35 +32,41 @@ interface TheMovieApi {
     fun getNowPlaying(
         @Query(PARAM_API_KEY) apiKey : String = MOVIE_API_KEY,
         @Query(PARAM_PAGE) page : Int = 1,
-    ) : Call<MovieListResponse>
+    ) : Observable<MovieListResponse>
 
     @GET("$API_MOVIE_DETAILS/{movie_id}")
     fun getMovieDetails(
         @Path("movie_id") movieId : String,
         @Query(PARAM_API_KEY) apiKey: String = MOVIE_API_KEY
-    ) : Call<MovieVO>
+    ) : Observable<MovieVO>
 
     @GET("$API_VIDEOS/{movie_id}/videos")
     fun getVideos(
         @Path("movie_id") movieId : String,
         @Query(PARAM_API_KEY) apiKey: String = MOVIE_API_KEY
-    ) : Call<VideoVO>
+    ) : Observable<VideoVO>
 
     @GET(API_GENRE_LIST)
     fun getGenreList(
         @Query(PARAM_API_KEY) apiKey: String = MOVIE_API_KEY
-    ):Call<GenreListResponse>
+    ):Observable<GenreListResponse>
 
     @GET(API_MOVIES_BY_GENRE_ID)
     fun getMoviesByGenre(
         @Query(PARAM_GENRE_ID) genreId : String,
         @Query(PARAM_API_KEY) apiKey: String = MOVIE_API_KEY
-    ):Call<MovieListResponse>
+    ):Observable<MovieListResponse>
 
     @GET("$API_CREDIT_BY_MOVIE/{movie_id}/credits")
     fun getActors(
         @Path("movie_id") movieId: String,
         @Query(PARAM_API_KEY) apiKey: String = MOVIE_API_KEY
-    ):Call<CreditMovieResponse>
+    ):Observable<CreditMovieResponse>
+
+    @GET(API_SEARCH_MOVIE)
+    fun getSearchMovies(
+        @Query(PARAM_API_KEY) apiKey: String = MOVIE_API_KEY,
+        @Query(PARAM_QUERY) query: String
+    ) : Observable<MovieListResponse>
 
 }

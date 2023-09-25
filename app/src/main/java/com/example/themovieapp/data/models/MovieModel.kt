@@ -1,22 +1,22 @@
 package com.example.themovieapp.data.models
 
+import androidx.lifecycle.LiveData
 import com.example.themovieapp.data.vos.CastVO
 import com.example.themovieapp.data.vos.GenreVO
 import com.example.themovieapp.data.vos.MovieVO
 import com.example.themovieapp.data.vos.VideoVO
+import io.reactivex.rxjava3.core.Observable
 
 interface MovieModel {
 
     fun getNowPlaying(
-        onSuccess : (List<MovieVO>) -> Unit,
         onFailure : (String) -> Unit
-    )
+    ):LiveData<List<MovieVO>>?
 
     fun getMovieDetails(
         movieId : String,
-        onSuccess: (MovieVO) -> Unit,
         onFailure: (String) -> Unit
-    )
+    ):LiveData<MovieVO?>?
 
     fun getVideos(
         movieId: String,
@@ -40,6 +40,11 @@ interface MovieModel {
         onSuccess: (List<CastVO>) -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun getSearchMovie(
+        query : String,
+        onFailure: (String) -> Unit
+    ):Observable<List<MovieVO>>
 
 
 

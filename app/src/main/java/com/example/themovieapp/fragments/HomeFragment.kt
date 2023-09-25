@@ -1,26 +1,20 @@
 package com.example.themovieapp.fragments
-
-import android.graphics.RenderEffect
-import android.graphics.Shader
-import android.media.midi.MidiOutputPort
-import android.os.Build
+import android.annotation.SuppressLint
+import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.themovieapp.R
 import com.example.themovieapp.adapters.BannerAdapter
 import com.example.themovieapp.adapters.MoviesAdapter
 import com.example.themovieapp.data.models.MovieModel
 import com.example.themovieapp.data.models.MovieModelImpl
 import com.example.themovieapp.data.vos.GenreVO
-import com.example.themovieapp.data.vos.MovieVO
 import com.example.themovieapp.databinding.FragmentHomeBinding
 import com.example.themovieapp.delegates.BannerViewHolderDelegate
 import com.example.themovieapp.delegates.MoviesViewHolderDelegate
@@ -29,9 +23,9 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate {
 
-    lateinit var binding: FragmentHomeBinding
-    lateinit var mBannerAdapter: BannerAdapter
-    lateinit var mMoviesAdapter: MoviesAdapter
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var mBannerAdapter: BannerAdapter
+    private lateinit var mMoviesAdapter: MoviesAdapter
 
     private var mMovieModel : MovieModel = MovieModelImpl
     private var mGenreList : List<GenreVO> = listOf()
@@ -40,11 +34,13 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         return  FragmentHomeBinding.inflate(inflater).also{
             binding = it
         }.root
+
+
     }
 
 
@@ -69,7 +65,7 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
     private fun setUpListeners(){
         binding.tabGenres.addOnTabSelectedListener(object : OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                mGenreList?.get(tab?.position ?: 0)?.id?.let {
+                mGenreList[tab?.position ?: 0].id.let {
 
                     getMoviesByGenreId(it.toString())
 
@@ -96,16 +92,13 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
         binding.rvMovies.adapter = mMoviesAdapter
     }
 
+
     private fun requestData() {
-        mMovieModel.getNowPlaying(
-            onSuccess = {
-                mBannerAdapter.setNewData(it)
+       mMovieModel.getNowPlaying {
 
-            },
-            onFailure = {
-
-            }
-        )
+       }?.observe(viewLifecycleOwner){
+           mBannerAdapter.setNewData(it)
+       }
 
 
         mMovieModel.getGenreList(
