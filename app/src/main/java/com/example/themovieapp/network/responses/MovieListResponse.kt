@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName
 
 data class MovieListResponse(
     @SerializedName("dates")
-    val dates : DateVO,
+    val dates : DateVO?,
 
     @SerializedName("page")
     val page : Int = 1,
 
     @SerializedName("results")
-    val result : List<MovieVO>
+    val result : List<MovieVO>?
 )

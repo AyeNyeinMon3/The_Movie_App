@@ -21,8 +21,8 @@ object MovieModelImpl:MovieModel,BaseModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
-                it.result.forEach { movie -> movie.type = NOW_PLAYING }
-                mMovieDatabase?.movieDao()?.insertMovies(it.result)
+                it.result?.forEach { movie -> movie.type = NOW_PLAYING }
+                mMovieDatabase?.movieDao()?.insertMovies(it.result ?: listOf())
             },
             {
                 onFailure(it.localizedMessage ?: "")
@@ -91,7 +91,7 @@ object MovieModelImpl:MovieModel,BaseModel() {
            .subscribeOn(Schedulers.io())
            .observeOn(AndroidSchedulers.mainThread())
            .subscribe({
-               onSuccess(it.result)
+               onSuccess(it.result ?: listOf())
            },{
                onFailure(it.localizedMessage ?: "")
            })
@@ -115,18 +115,14 @@ object MovieModelImpl:MovieModel,BaseModel() {
     }
 
 
-    override fun getSearchMovie(
-        query: String,
-        onFailure: (String) -> Unit
-    ): Observable<List<MovieVO>> {
+    override fun getSearchMovie(query: String): Observable<List<MovieVO>> {
 
         return mMovieApi
             .getSearchMovies(query = query)
-            .map { it.result }
+            .map { it.result ?: listOf() }
             .onErrorResumeNext { Observable.just(listOf()) }
             .subscribeOn(Schedulers.io())
+    }
 
     }
 
-
-}

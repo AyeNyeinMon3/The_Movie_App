@@ -43,7 +43,6 @@ interface MovieModel {
 
     fun getSearchMovie(
         query : String,
-        onFailure: (String) -> Unit
     ):Observable<List<MovieVO>>
 
 

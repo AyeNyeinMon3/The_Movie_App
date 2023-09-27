@@ -31,7 +31,7 @@ class MoviesViewHolder(itemView: View,private var delegate: MoviesViewHolderDele
             .into(itemView.findViewById(R.id.iv_poster))
 
         itemView.findViewById<TextView>(R.id.tv_movieName).text = movie.originalTitle
-        itemView.findViewById<TextView>(R.id.tv_releaseYear).text = movie.releaseDate?.substring(0,4)
+        itemView.findViewById<TextView>(R.id.tv_releaseYear).text = movie.releaseDate
         itemView.findViewById<RatingBar>(R.id.ratingBar).rating = movie.getRatingBasedOnFiveStars()
         itemView.findViewById<TextView>(R.id.tv_voteAverage).text = movie.voteAverage.toString()
 

@@ -20,6 +20,10 @@ import com.example.themovieapp.delegates.BannerViewHolderDelegate
 import com.example.themovieapp.delegates.MoviesViewHolderDelegate
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate {
 
@@ -48,16 +52,42 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
         super.onViewCreated(view, savedInstanceState)
 
         setUpRecyclerAdapter()
-
         setUpListeners()
-
         requestData()
+        getSearchMovies()
 
 //        //blur background effect
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 //            binding.chipNavBar.setRenderEffect(RenderEffect.createBlurEffect(30F, 30F,Shader.TileMode.MIRROR))
 //        }
 
+//        val myList = listOf(binding.rvBanner,binding.tabGenres,binding.tvSuggested)
+//
+//        binding.textInputLayoutSearchMovie.setStartIconOnClickListener {
+//
+//            myList.forEach {
+//                it.isVisible = false
+//            }
+//        }
+
+
+    }
+
+    @SuppressLint("CheckResult")
+    private fun getSearchMovies(){
+
+        binding.edtSearchMovie.textChanges()
+            .debounce(500L,TimeUnit.MILLISECONDS)
+            .flatMap {
+                mMovieModel.getSearchMovie(it.toString())
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mMoviesAdapter.setNewData(it)
+            },{
+                error(it.localizedMessage ?: "")
+            })
 
 
     }
