@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.themovieapp.adapters.BannerAdapter
 import com.example.themovieapp.adapters.MoviesAdapter
+import com.example.themovieapp.adapters.SearchMoviesAdapter
 import com.example.themovieapp.data.models.MovieModel
 import com.example.themovieapp.data.models.MovieModelImpl
 import com.example.themovieapp.data.vos.GenreVO
@@ -30,6 +32,7 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mBannerAdapter: BannerAdapter
     private lateinit var mMoviesAdapter: MoviesAdapter
+    private lateinit var mSearchMoviesAdapter: SearchMoviesAdapter
 
     private var mMovieModel : MovieModel = MovieModelImpl
     private var mGenreList : List<GenreVO> = listOf()
@@ -61,14 +64,24 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
 //            binding.chipNavBar.setRenderEffect(RenderEffect.createBlurEffect(30F, 30F,Shader.TileMode.MIRROR))
 //        }
 
-//        val myList = listOf(binding.rvBanner,binding.tabGenres,binding.tvSuggested)
-//
-//        binding.textInputLayoutSearchMovie.setStartIconOnClickListener {
-//
-//            myList.forEach {
-//                it.isVisible = false
-//            }
-//        }
+        val myList = listOf(binding.rvBanner,binding.tabGenres,binding.tvSuggested,binding.rvMovies)
+
+       binding.edtSearchMovie.addTextChangedListener {
+           if (it.isNullOrEmpty()){
+               myList.forEach { view ->
+                   view.isVisible = true
+                   binding.rvSearchMovies.isVisible = false
+               }
+           }else{
+               myList.forEach { view ->
+                   view.isVisible = false
+                   binding.rvSearchMovies.isVisible = true
+               }
+           }
+       }
+
+
+
 
 
     }
@@ -84,7 +97,7 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                mMoviesAdapter.setNewData(it)
+                mSearchMoviesAdapter.setNewData(it)
             },{
                 error(it.localizedMessage ?: "")
             })
@@ -120,6 +133,9 @@ class HomeFragment: Fragment(),MoviesViewHolderDelegate,BannerViewHolderDelegate
 
         mMoviesAdapter = MoviesAdapter(this)
         binding.rvMovies.adapter = mMoviesAdapter
+
+        mSearchMoviesAdapter = SearchMoviesAdapter(this)
+        binding.rvSearchMovies.adapter = mSearchMoviesAdapter
     }
 
 
